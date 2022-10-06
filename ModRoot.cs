@@ -177,6 +177,14 @@ namespace ELTaiwuUtility
         public const sbyte male = 1;
         public static Random rand = new Random();
 
+        //主属性索引号
+        public const int 臂力 = 0;
+        public const int 灵敏 = 1;
+        public const int 定力 = 2;
+        public const int 体质 = 3;
+        public const int 根骨 = 4;
+        public const int 悟性 = 5;
+
         public enum SkillGrowthType
         {
             Average = 0,
