@@ -92,7 +92,7 @@ namespace ELTaiwuUtility
                 DomainManager.Mod.GetSetting(ModIdStr, modKey, ref neiliCapMult);
                 return neiliCapMult > 1;
             }
-            if (modKey == "ELMod15_EconomizeSkillGrid")
+            if (modKey == "ELMod15_NoSamsaraInjuryEffect")
             {
                 DomainManager.Mod.GetSetting(ModIdStr, modKey, ref enabled);
                 return enabled;
@@ -105,7 +105,6 @@ namespace ELTaiwuUtility
         public override void OnModSettingUpdate()
         {
             HarmonyInstance.UnpatchSelf();
-            EconomizeSkillGrid.loaded = false;
             HarmonyInstance.PatchAll(typeof(GetCloseFriend));
 
             if (IsModEnabled("ELMod00_LockAllGoodFeatures"))
@@ -153,11 +152,8 @@ namespace ELTaiwuUtility
             if (IsModEnabled("ELMod14_IncreaseNeiliCap"))
                 HarmonyInstance.PatchAll(typeof(IncreaseNeiliCap));
 
-            if (IsModEnabled("ELMod15_EconomizeSkillGrid"))
-            { 
-                HarmonyInstance.PatchAll(typeof(EconomizeSkillGrid));
-                Config.CombatSkill.Instance.GetAllKeys();
-            }
+            if (IsModEnabled("ELMod15_NoSamsaraInjuryEffect"))
+                HarmonyInstance.PatchAll(typeof(NoSamsaraInjuryEffect));
         }
 
         public override void Initialize()
@@ -168,7 +164,6 @@ namespace ELTaiwuUtility
         public override void Dispose()
         {
             HarmonyInstance.UnpatchSelf();
-            EconomizeSkillGrid.loaded = false;
         }
         //------
 

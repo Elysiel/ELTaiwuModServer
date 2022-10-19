@@ -130,30 +130,5 @@ namespace ELTaiwuUtility
                 lostPagesCount = 0;
             }
         }
-
-        //节约功法格子
-        [HarmonyPatch]
-        public class EconomizeSkillGrid
-        {
-            public static bool loaded;
-            
-            [HarmonyPatch(typeof(CombatSkill), "GetAllKeys")]
-            public static void Postfix(ref List<CombatSkillItem> ____dataArray)
-            {
-                if (loaded) return;
-                sbyte gridCount = 12;
-                foreach (CombatSkillItem combatSkillItem in ____dataArray)
-                {
-                    typeof(CombatSkillItem).GetField("GridCost").SetValue(combatSkillItem, (sbyte)1);
-                    if (combatSkillItem.Type == 0)
-                    {
-                        //gridCount = (sbyte)typeof(CombatSkillItem).GetField("GenericGrid").GetValue(combatSkillItem);
-                        //gridCount += (sbyte)12;
-                        typeof(CombatSkillItem).GetField("GenericGrid").SetValue(combatSkillItem, gridCount);
-                    }
-                }
-                loaded = true;
-            }
-        }
     }
 }
